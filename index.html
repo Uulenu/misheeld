@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Girlfriends Day 💕</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,500;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF6F2;
+    --blush:#FFD9E3;
+    --blush-soft:#FFEEF3;
+    --rose:#FF6F91;
+    --rose-deep:#E14F72;
+    --mauve:#6B3F4B;
+    --mauve-soft:#9C6B78;
+    --gold:#E3B23C;
+    --white:#FFFFFF;
+    --shadow: 0 20px 45px -20px rgba(107,63,75,0.35);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Quicksand', sans-serif;
+    background: radial-gradient(circle at 20% 15%, #FFEAF0 0%, var(--cream) 45%, #FFF1E8 100%);
+    color:var(--mauve);
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+  h1,h2,h3, .display{
+    font-family:'Fraunces', serif;
+  }
+  /* ---------- floating petals ---------- */
+  .petals{
+    position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;
+  }
+  .petal{
+    position:absolute; top:-40px;
+    font-size: 18px;
+    opacity:0.55;
+    animation: fall linear infinite;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.05));
+  }
+  @keyframes fall{
+    0%{ transform: translateY(-5vh) translateX(0) rotate(0deg); }
+    100%{ transform: translateY(105vh) translateX(20px) rotate(200deg); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .petal{ animation: none; display:none; }
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  .screen{
+    position:relative; z-index:1;
+    min-height:100vh;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    padding: 32px 20px 60px;
+    animation: fadeIn 0.5s ease;
+  }
+  .screen.active{ display:flex; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+  /* ---------- Home ---------- */
+  #home .eyebrow{
+    letter-spacing:.22em; text-transform:uppercase; font-size:12px; font-weight:700;
+    color:var(--rose-deep); margin-bottom:14px;
+  }
+  #home h1{
+    font-size: clamp(2.1rem, 6vw, 3.4rem);
+    font-style: italic;
+    font-weight:600;
+    color:var(--mauve);
+    text-align:center;
+    max-width: 720px;
+    line-height:1.15;
+    margin: 0 0 14px;
+  }
+  #home h1 span{ color:var(--rose-deep); }
+  #home p.sub{
+    font-size: 1.15rem;
+    color: var(--mauve-soft);
+    text-align:center;
+    margin: 0 0 40px;
+  }
+  .btn-row{
+    position:relative;
+    display:flex; gap:22px; align-items:center; justify-content:center;
+    min-height: 90px;
+    width: 100%;
+  }
+  .btn{
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    font-size: 1.05rem;
+    padding: 16px 38px;
+    border-radius: 100px;
+    border: none;
+    cursor:pointer;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:focus-visible{ outline: 3px solid var(--gold); outline-offset:3px; }
+  .btn-yes{
+    background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+    color:white;
+    box-shadow: var(--shadow);
+  }
+  .btn-yes:hover{ transform: translateY(-2px) scale(1.03); }
+  .btn-no{
+    background: var(--white);
+    color: var(--mauve-soft);
+    border: 2px solid var(--blush);
+    position:relative;
+    left:0; top:0;
+  }
+
+  /* ---------- Modal ---------- */
+  .modal-backdrop{
+    position:fixed; inset:0; background: rgba(107,63,75,0.35);
+    display:none; align-items:center; justify-content:center; z-index: 50;
+    backdrop-filter: blur(2px);
+  }
+  .modal-backdrop.active{ display:flex; }
+  .modal{
+    background:var(--white);
+    border-radius: 24px;
+    padding: 36px 34px;
+    max-width: 340px;
+    text-align:center;
+    box-shadow: var(--shadow);
+    animation: pop .25s ease;
+  }
+  @keyframes pop{ from{ transform:scale(.85); opacity:0;} to{ transform:scale(1); opacity:1;} }
+  .modal p{ font-size:1.15rem; font-weight:600; margin: 4px 0 22px; font-family:'Fraunces', serif; font-style:italic;}
+  .modal .btn-yes{ padding: 12px 34px; font-size:1rem; }
+
+  /* ---------- Gifts grid ---------- */
+  #gifts h2, #gift-flowers h2, #gift-song h2, #gift-pictures h2, #gift-letter h2{
+    font-style: italic; font-weight:600;
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    text-align:center; margin: 4px 0 6px;
+  }
+  #gifts p.sub{ color:var(--mauve-soft); margin:0 0 34px; text-align:center; }
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 18px;
+    max-width: 640px;
+    width:100%;
+  }
+  @media (max-width:560px){ .grid{ grid-template-columns: 1fr; gap:16px; } }
+
+  /* ---- secret flip cards ---- */
+  .flip-card{
+    perspective: 1200px;
+    height: 168px;
+  }
+  .flip-inner{
+    position:relative;
+    width:100%; height:100%;
+    transition: transform .55s cubic-bezier(.2,.7,.3,1);
+    transform-style: preserve-3d;
+    cursor:pointer;
+  }
+  .flip-card.flipped .flip-inner{ transform: rotateY(180deg); }
+  .flip-front, .flip-back{
+    position:absolute; inset:0;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    border-radius: 22px;
+    border: 1px solid var(--blush);
+    box-shadow: 0 10px 30px -18px rgba(107,63,75,0.35);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding: 18px;
+    text-align:center;
+  }
+  .flip-front{
+    background: linear-gradient(135deg, var(--blush), var(--blush-soft));
+    transition: box-shadow .2s ease;
+  }
+  .flip-card:hover .flip-front{ box-shadow: var(--shadow); }
+  .flip-front .icon{ font-size:2.1rem; margin-bottom:8px; }
+  .flip-front .hint{ font-size:.82rem; font-weight:700; color:var(--rose-deep); letter-spacing:.03em; }
+  .flip-back{
+    background: var(--white);
+    transform: rotateY(180deg);
+  }
+  .flip-back .icon{ font-size: 2.1rem; margin-bottom:6px; display:block; }
+  .flip-back h3{ margin: 0 0 4px; font-size:1.08rem; font-style:italic; font-weight:600; }
+  .flip-back p{ margin:0; font-size:.85rem; color:var(--mauve-soft); }
+  .flip-back .enter-hint{
+    margin-top:8px; font-size:.72rem; font-weight:700; color:var(--rose-deep);
+    letter-spacing:.02em; text-transform:uppercase;
+  }
+
+  /* ---------- Detail pages ---------- */
+  .detail-wrap{
+    max-width: 620px; width:100%;
+    background: var(--white);
+    border-radius: 28px;
+    padding: 40px 34px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--blush);
+    position:relative;
+  }
+  .back-btn{
+    background:none; border:none; cursor:pointer;
+    color: var(--rose-deep); font-weight:700; font-size:.95rem;
+    display:inline-flex; align-items:center; gap:6px;
+    margin-bottom: 18px; padding: 6px 0;
+    font-family:'Quicksand', sans-serif;
+  }
+  .back-btn:hover{ text-decoration: underline; }
+
+  /* bouquet photo */
+  .orchid-frame{
+    position:relative;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 900/602;
+    margin: 6px auto 22px;
+    border-radius: 18px;
+    overflow:hidden;
+    background: linear-gradient(135deg, var(--blush), var(--blush-soft));
+    border: 1px solid var(--blush);
+    box-shadow: 0 10px 26px -16px rgba(107,63,75,0.4);
+  }
+  .orchid-frame img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .orchid-frame .img-missing-note{
+    display:none;
+    position:absolute; inset:0;
+    align-items:center; justify-content:center; text-align:center;
+    flex-direction:column; gap:8px;
+    font-size:.85rem; color:var(--mauve-soft); line-height:1.6; padding: 16px;
+  }
+  .orchid-frame .img-missing-note code{
+    background: rgba(255,255,255,0.6); padding:2px 8px; border-radius:6px; font-size:.8rem;
+  }
+  .orchid-frame.img-missing img{ display:none; }
+  .orchid-frame.img-missing .img-missing-note{ display:flex; }
+
+  /* youtube embed */
+  .video-wrap{
+    position:relative; width:100%; padding-top:56.25%;
+    border-radius:16px; overflow:hidden; margin: 4px 0 18px;
+    box-shadow: 0 10px 26px -16px rgba(107,63,75,0.4);
+  }
+  .video-wrap iframe{
+    position:absolute; inset:0; width:100%; height:100%; border:0;
+  }
+    font-size: 1.02rem; line-height:1.75; color: var(--mauve);
+    background: var(--blush-soft); border-radius:16px; padding: 22px 24px;
+    font-family:'Fraunces', serif; font-style:italic;
+  }
+
+  /* song */
+  .song-card{
+    display:flex; align-items:center; gap:16px;
+    background: var(--blush-soft); border-radius:18px; padding: 20px 22px; margin: 10px 0 18px;
+  }
+  .song-note{ font-size:2.2rem; }
+  .song-title{ font-weight:700; font-size:1.05rem; }
+  .song-artist{ color:var(--mauve-soft); font-size:.9rem; }
+  .song-link{
+    display:inline-block; margin-top:16px; text-decoration:none;
+    background: var(--mauve); color:white; padding: 12px 26px; border-radius:100px;
+    font-weight:700; font-size:.92rem;
+  }
+  .song-note-box{
+    font-size:.85rem; color:var(--mauve-soft); margin-top:14px; text-align:center;
+  }
+
+  /* pictures */
+  .pic-grid{
+    display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; margin-top:6px;
+  }
+  .polaroid{
+    background:white; border:1px solid var(--blush); border-radius: 10px; padding: 10px 10px 16px;
+    box-shadow: 0 8px 18px -12px rgba(107,63,75,0.4);
+    transform: rotate(var(--r,-2deg));
+  }
+  .polaroid:nth-child(2){ --r: 2deg; }
+  .polaroid:nth-child(3){ --r: 1.5deg; }
+  .polaroid:nth-child(4){ --r: -1.5deg; }
+  .polaroid .frame{
+    aspect-ratio: 1/1; border-radius:6px;
+    background: linear-gradient(135deg, var(--blush), var(--blush-soft));
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.8rem; color: var(--rose-deep);
+  }
+  .polaroid .cap{ text-align:center; font-size:.8rem; margin-top:8px; color:var(--mauve-soft); }
+
+  /* big letter */
+  .letter-layout{
+    display:flex; align-items:center; gap:18px;
+  }
+  .letter-layout .side-pic{
+    flex: 0 0 90px;
+  }
+  .letter-layout .side-pic .frame{
+    aspect-ratio: 3/4; border-radius:10px;
+    background: linear-gradient(135deg, var(--blush), var(--blush-soft));
+    display:flex; align-items:center; justify-content:center; font-size:1.4rem; color:var(--rose-deep);
+    border:1px solid var(--blush);
+  }
+  .letter-layout .center{ flex:1; }
+  @media (max-width:520px){
+    .letter-layout{ flex-direction:column; }
+    .letter-layout .side-pic{ flex:none; width:110px; }
+  }
+  .signature{
+    text-align:right; margin-top:16px; font-family:'Fraunces', serif; font-style:italic; color:var(--rose-deep); font-size:1.05rem;
+  }
+
+  footer.tag{
+    margin-top: 26px; font-size:.75rem; color: var(--mauve-soft); opacity:.7; text-align:center;
+  }
+
+  /* ---------- small phones ---------- */
+  @media (max-width:480px){
+    .screen{ padding: 24px 14px 48px; }
+    .detail-wrap{ padding: 28px 20px; border-radius: 22px; }
+    #home h1{ font-size: 1.85rem; }
+    #home p.sub{ font-size: 1rem; }
+    .btn{ padding: 14px 28px; font-size: 1rem; }
+    .flip-card{ height: 150px; }
+    .letter-layout .side-pic{ width: 84px; }
+  }
+  /* ---------- large desktop screens ---------- */
+  @media (min-width: 1200px){
+    .grid{ max-width: 680px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="petals" id="petals"></div>
+
+<!-- ================= HOME ================= -->
+<section class="screen active" id="home">
+  <div class="eyebrow">National Girlfriends Day</div>
+  <h1>Happy Girlfriend&rsquo;s Day, my <span>baby</span> 💕<br/>do you want to see your gift?</h1>
+  <p class="sub">tap yes... you know you want to 😉</p>
+  <div class="btn-row" id="btnRow">
+    <button class="btn btn-yes" id="yesBtn">Yes 🎁</button>
+    <button class="btn btn-no" id="noBtn">No</button>
+  </div>
+</section>
+
+<!-- ================= GIFTS GRID ================= -->
+<section class="screen" id="gifts">
+  <div style="max-width:640px; width:100%;">
+    <button class="back-btn" data-back="home">← back</button>
+  </div>
+  <h2>Your Surprise Gifts 🎁</h2>
+  <p class="sub">tap a gift to discover it, then tap again to open</p>
+  <div class="grid">
+
+    <div class="flip-card" data-target="gift-flowers">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="icon">🎁</span><span class="hint">tap to discover</span></div>
+        <div class="flip-back">
+          <span class="icon">💐</span>
+          <h3>Flower Bouquet</h3>
+          <p>a bouquet + a little letter</p>
+          <span class="enter-hint">tap again to open →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" data-target="gift-song">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="icon">🎁</span><span class="hint">tap to discover</span></div>
+        <div class="flip-back">
+          <span class="icon">🎵</span>
+          <h3>Our Song</h3>
+          <p>the song that reminds me of you</p>
+          <span class="enter-hint">tap again to open →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" data-target="gift-pictures">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="icon">🎁</span><span class="hint">tap to discover</span></div>
+        <div class="flip-back">
+          <span class="icon">📸</span>
+          <h3>Favorite Pictures</h3>
+          <p>my favorite moments of us</p>
+          <span class="enter-hint">tap again to open →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" data-target="gift-letter">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="icon">🎁</span><span class="hint">tap to discover</span></div>
+        <div class="flip-back">
+          <span class="icon">💌</span>
+          <h3>A Letter for You</h3>
+          <p>everything I want to say</p>
+          <span class="enter-hint">tap again to open →</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= GIFT: FLOWERS ================= -->
+<section class="screen" id="gift-flowers">
+  <div class="detail-wrap">
+    <button class="back-btn" data-back="gifts">← back</button>
+    <h2>A Bouquet Just for You 💐</h2>
+    <div class="orchid-frame">
+      <!-- EDIT: save the burgundy orchid photo (from your Pinterest pin) into an "images" folder
+           next to this file, name it orchid.jpg, and it will show up automatically here.
+           Pinterest blocks direct hotlinking, so a saved local copy is the reliable way to show it. -->
+      <img src="images/orchid.jpg" alt="Burgundy orchid bouquet" onerror="this.parentElement.classList.add('img-missing')">
+      <div class="img-missing-note">🌺<br>save your burgundy orchid photo as<br><code>images/orchid.jpg</code></div>
+    </div>
+    <div class="letter-text">
+      Hello my LOVE,<br><br>
+      Sometimes time passes by way too fast, just like a dream. But the best part is that I get to share
+      every fleeting moment with you. You coming into my life made everything so much more colorful and
+      bright. When I think about how wonderful our past has been, I know that the stories waiting for us
+      in the future will be even more amazing. So let&rsquo;s hold hands and create the most beautiful
+      memories in this world together. I love you endlessly, my love😘. Happy Girlfriend&rsquo;s Day❤️
+    </div>
+    <div class="signature">&mdash; yours always</div>
+  </div>
+</section>
+
+<!-- ================= GIFT: SONG ================= -->
+<section class="screen" id="gift-song">
+  <div class="detail-wrap">
+    <button class="back-btn" data-back="gifts">← back</button>
+    <h2>The Song That Reminds Me of You 🎵</h2>
+    <div class="song-card">
+      <div class="song-note">🎶</div>
+      <div>
+        <div class="song-title">Just the Way You Are</div>
+        <div class="song-artist">Bruno Mars</div>
+      </div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/LjhCEhWiKXk" title="Just the Way You Are - Bruno Mars" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div style="text-align:center;">
+      <a class="song-link" href="https://www.youtube.com/watch?v=LjhCEhWiKXk" target="_blank" rel="noopener">Open on YouTube ▶</a>
+    </div>
+    <p class="song-note-box">Every time this plays, I think of you.</p>
+  </div>
+</section>
+
+<!-- ================= GIFT: PICTURES ================= -->
+<section class="screen" id="gift-pictures">
+  <div class="detail-wrap">
+    <button class="back-btn" data-back="gifts">← back</button>
+    <h2>My Favorite Pictures of Us 📸</h2>
+    <div class="pic-grid">
+      <!-- EDIT: replace each .frame div's content with <img src="images/photo1.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"> -->
+      <div class="polaroid"><div class="frame">📷</div><div class="cap">our first date</div></div>
+      <div class="polaroid"><div class="frame">📷</div><div class="cap">that trip we took</div></div>
+      <div class="polaroid"><div class="frame">📷</div><div class="cap">your favorite silly face</div></div>
+      <div class="polaroid"><div class="frame">📷</div><div class="cap">just us, being us</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GIFT: BIG LETTER ================= -->
+<section class="screen" id="gift-letter">
+  <div class="detail-wrap">
+    <button class="back-btn" data-back="gifts">← back</button>
+    <h2>A Letter for You 💌</h2>
+    <div class="letter-layout">
+      <div class="side-pic">
+        <!-- EDIT: replace with <img src="images/photo5.jpg" ...> -->
+        <div class="frame">📷</div>
+      </div>
+      <div class="center">
+        <!-- EDIT THIS LETTER TEXT -->
+        <div class="letter-text" style="font-size:.95rem;">
+          To my favorite person, thank you for every ordinary day you make extraordinary. On this
+          Girlfriend&rsquo;s Day I just want you to know how much you mean to me &mdash; replace this
+          paragraph with everything you actually want to say to her.
+        </div>
+        <div class="signature">I love you.</div>
+      </div>
+      <div class="side-pic">
+        <!-- EDIT: replace with <img src="images/photo6.jpg" ...> -->
+        <div class="frame">📷</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MODAL (No clicked) ================= -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <div style="font-size:2rem;">🥺</div>
+    <p>Aw, come on... try again?</p>
+    <button class="btn btn-yes" id="tryAgainBtn">Try Again</button>
+  </div>
+</div>
+
+<script>
+  // ---------- floating petals ----------
+  const petalEmojis = ['🌸','💗','🌷','✨'];
+  const petalsWrap = document.getElementById('petals');
+  for(let i=0;i<18;i++){
+    const p = document.createElement('div');
+    p.className='petal';
+    p.textContent = petalEmojis[Math.floor(Math.random()*petalEmojis.length)];
+    p.style.left = Math.random()*100+'vw';
+    p.style.animationDuration = (9+Math.random()*10)+'s';
+    p.style.animationDelay = (Math.random()*10)+'s';
+    p.style.fontSize = (14+Math.random()*14)+'px';
+    petalsWrap.appendChild(p);
+  }
+
+  // ---------- screen navigation ----------
+  function showScreen(id){
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  // ---------- secret gift cards: tap to reveal, tap again to open ----------
+  document.querySelectorAll('.flip-card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      if(!card.classList.contains('flipped')){
+        card.classList.add('flipped');
+      } else {
+        showScreen(card.dataset.target);
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-back]').forEach(btn=>{
+    btn.addEventListener('click', ()=> showScreen(btn.dataset.back));
+  });
+
+  document.getElementById('yesBtn').addEventListener('click', ()=> showScreen('gifts'));
+
+  // ---------- No button: dodges on hover/tap, opens modal once caught ----------
+  const noBtn = document.getElementById('noBtn');
+  const btnRow = document.getElementById('btnRow');
+  let dodgeCount = 0;
+  const MAX_DODGES = 4;
+
+  function dodge(){
+    dodgeCount++;
+    const rowRect = btnRow.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
+    const maxX = Math.max(0, rowRect.width - btnRect.width - 24) / 2;
+    const randX = (Math.random()*2 - 1) * maxX;
+    const randY = (Math.random()*36) - 18;
+    noBtn.style.transform = `translate(${randX}px, ${randY}px)`;
+  }
+
+  noBtn.addEventListener('mouseenter', ()=>{
+    if(dodgeCount >= MAX_DODGES) return; // let them catch it eventually
+    dodge();
+  });
+  noBtn.addEventListener('touchstart', (e)=>{
+    if(dodgeCount < MAX_DODGES){
+      e.preventDefault();
+      dodge();
+    }
+  }, {passive:false});
+  noBtn.addEventListener('click', ()=>{
+    document.getElementById('modalBackdrop').classList.add('active');
+  });
+  document.getElementById('tryAgainBtn').addEventListener('click', ()=>{
+    document.getElementById('modalBackdrop').classList.remove('active');
+    noBtn.style.transform = 'translate(0,0)';
+    dodgeCount = 0;
+    document.querySelectorAll('.flip-card').forEach(c=> c.classList.remove('flipped'));
+    showScreen('home');
+  });
+
+  // re-clamp the No button if the window is resized while it's mid-dodge
+  window.addEventListener('resize', ()=>{
+    noBtn.style.transform = 'translate(0,0)';
+  });
+</script>
+
+</body>
+</html>
