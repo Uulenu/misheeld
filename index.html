@@ -9,22 +9,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,500;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:#FFF6F2;
-    --blush:#FFD9E3;
-    --blush-soft:#FFEEF3;
-    --rose:#FF6F91;
-    --rose-deep:#E14F72;
-    --mauve:#6B3F4B;
-    --mauve-soft:#9C6B78;
-    --gold:#E3B23C;
+    --cream:#F8F3FB;
+    --blush:#E3D2F0;
+    --blush-soft:#F1E9F7;
+    --rose:#8E4B9E;
+    --rose-deep:#5C2E6B;
+    --mauve:#3D2142;
+    --mauve-soft:#7C5C82;
+    --gold:#C6A15B;
     --white:#FFFFFF;
-    --shadow: 0 20px 45px -20px rgba(107,63,75,0.35);
+    --shadow: 0 20px 45px -20px rgba(61,33,66,0.35);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     font-family:'Quicksand', sans-serif;
-    background: radial-gradient(circle at 20% 15%, #FFEAF0 0%, var(--cream) 45%, #FFF1E8 100%);
+    background: radial-gradient(circle at 20% 15%, #F1E2FA 0%, var(--cream) 45%, #FBF4FD 100%);
     color:var(--mauve);
     min-height:100vh;
     overflow-x:hidden;
@@ -82,6 +82,12 @@
     margin: 0 0 14px;
   }
   #home h1 span{ color:var(--rose-deep); }
+  #home h1 .mn-question{
+    display:block;
+    font-size: 0.6em;
+    margin-top: 10px;
+    color: var(--mauve);
+  }
   #home p.sub{
     font-size: 1.15rem;
     color: var(--mauve-soft);
@@ -121,7 +127,7 @@
 
   /* ---------- Modal ---------- */
   .modal-backdrop{
-    position:fixed; inset:0; background: rgba(107,63,75,0.35);
+    position:fixed; inset:0; background: rgba(61,33,66,0.35);
     display:none; align-items:center; justify-content:center; z-index: 50;
     backdrop-filter: blur(2px);
   }
@@ -174,7 +180,7 @@
     -webkit-backface-visibility:hidden;
     border-radius: 22px;
     border: 1px solid var(--blush);
-    box-shadow: 0 10px 30px -18px rgba(107,63,75,0.35);
+    box-shadow: 0 10px 30px -18px rgba(61,33,66,0.35);
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     padding: 18px;
     text-align:center;
@@ -228,7 +234,7 @@
     overflow:hidden;
     background: linear-gradient(135deg, var(--blush), var(--blush-soft));
     border: 1px solid var(--blush);
-    box-shadow: 0 10px 26px -16px rgba(107,63,75,0.4);
+    box-shadow: 0 10px 26px -16px rgba(61,33,66,0.4);
   }
   .orchid-frame img{
     width:100%; height:100%; object-fit:cover; display:block;
@@ -250,11 +256,12 @@
   .video-wrap{
     position:relative; width:100%; padding-top:56.25%;
     border-radius:16px; overflow:hidden; margin: 4px 0 18px;
-    box-shadow: 0 10px 26px -16px rgba(107,63,75,0.4);
+    box-shadow: 0 10px 26px -16px rgba(61,33,66,0.4);
   }
   .video-wrap iframe{
     position:absolute; inset:0; width:100%; height:100%; border:0;
   }
+  .letter-text{
     font-size: 1.02rem; line-height:1.75; color: var(--mauve);
     background: var(--blush-soft); border-radius:16px; padding: 22px 24px;
     font-family:'Fraunces', serif; font-style:italic;
@@ -283,18 +290,22 @@
   }
   .polaroid{
     background:white; border:1px solid var(--blush); border-radius: 10px; padding: 10px 10px 16px;
-    box-shadow: 0 8px 18px -12px rgba(107,63,75,0.4);
+    box-shadow: 0 8px 18px -12px rgba(61,33,66,0.4);
     transform: rotate(var(--r,-2deg));
   }
   .polaroid:nth-child(2){ --r: 2deg; }
   .polaroid:nth-child(3){ --r: 1.5deg; }
   .polaroid:nth-child(4){ --r: -1.5deg; }
+  .polaroid:nth-child(5){ --r: 2.2deg; }
+  .polaroid:nth-child(6){ --r: -1deg; }
   .polaroid .frame{
     aspect-ratio: 1/1; border-radius:6px;
     background: linear-gradient(135deg, var(--blush), var(--blush-soft));
     display:flex; align-items:center; justify-content:center;
     font-size:1.8rem; color: var(--rose-deep);
+    overflow:hidden;
   }
+  .polaroid .frame img{ width:100%; height:100%; object-fit:cover; display:block; }
   .polaroid .cap{ text-align:center; font-size:.8rem; margin-top:8px; color:var(--mauve-soft); }
 
   /* big letter */
@@ -309,7 +320,9 @@
     background: linear-gradient(135deg, var(--blush), var(--blush-soft));
     display:flex; align-items:center; justify-content:center; font-size:1.4rem; color:var(--rose-deep);
     border:1px solid var(--blush);
+    overflow:hidden;
   }
+  .letter-layout .side-pic .frame img{ width:100%; height:100%; object-fit:cover; display:block; }
   .letter-layout .center{ flex:1; }
   @media (max-width:520px){
     .letter-layout{ flex-direction:column; }
@@ -346,8 +359,8 @@
 <!-- ================= HOME ================= -->
 <section class="screen active" id="home">
   <div class="eyebrow">National Girlfriends Day</div>
-  <h1>Happy Girlfriend&rsquo;s Day, my baby 💕<br/> <h2>Бэлгээ харахдаа бэлэн үү? </h2> </h1>
-  <p class="sub"> Yes дээр дараарай 😉</p>
+  <h1>Happy Girlfriend&rsquo;s Day, my baby 💕<span class="mn-question">Бэлгээ харахдаа бэлэн үү?</span></h1>
+  <p class="sub">Yes дээр дараарай 😉</p>
   <div class="btn-row" id="btnRow">
     <button class="btn btn-yes" id="yesBtn">Yes 🎁</button>
     <button class="btn btn-no" id="noBtn">No</button>
@@ -359,16 +372,16 @@
   <div style="max-width:640px; width:100%;">
     <button class="back-btn" data-back="home">← back</button>
   </div>
-  <h2> Шифриз 🎁</h2>
+  <h2>Шифриз 🎁</h2>
   <div class="grid">
 
     <div class="flip-card" data-target="gift-flowers">
       <div class="flip-inner">
-        <div class="flip-front"><span class="icon">🎁</span><span class="hint"> Юу байгааг нь мэдэхгүй ээ 😜 </span></div>
+        <div class="flip-front"><span class="icon">🎁</span><span class="hint">Юу байгааг нь мэдэхгүй ээ 😜</span></div>
         <div class="flip-back">
           <span class="icon">💐</span>
           <h3>Цэцгийн баглаа</h3>
-          <p>Баглаа + Захиа </p>
+          <p>Баглаа + Захиа</p>
         </div>
       </div>
     </div>
@@ -425,7 +438,7 @@
       in the future will be even more amazing. So let&rsquo;s hold hands and create the most beautiful
       memories in this world together. I love you endlessly, my love😘. Happy Girlfriend&rsquo;s Day❤️
     </div>
-    <div class="signature">&mdash; Your Urnuun </div>
+    <div class="signature">&mdash; Your Urnuun</div>
   </div>
 </section>
 
@@ -457,11 +470,12 @@
     <button class="back-btn" data-back="gifts">← back</button>
     <h2>My Favorite Pictures of Us 📸</h2>
     <div class="pic-grid">
-      <!-- EDIT: replace each .frame div's content with <img src="images/photo1.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"> -->
-      <div class="polaroid"><div class="frame">📷</div><div class="cap">our first date</div></div>
-      <div class="polaroid"><div class="frame">📷</div><div class="cap">that trip we took</div></div>
-      <div class="polaroid"><div class="frame">📷</div><div class="cap">your favorite silly face</div></div>
-      <div class="polaroid"><div class="frame">📷</div><div class="cap">just us, being us</div></div>
+      <div class="polaroid"><div class="frame"><img src="crime.jpg" alt="us together"></div><div class="cap">our first date</div></div>
+      <div class="polaroid"><div class="frame"><img src="hair.jpg" alt="us together"></div><div class="cap">that trip we took</div></div>
+      <div class="polaroid"><div class="frame"><img src="bayr.jpg" alt="us together"></div><div class="cap">your favorite silly face</div></div>
+      <div class="polaroid"><div class="frame"><img src="goo.jpg" alt="us together"></div><div class="cap">just us, being us</div></div>
+      <div class="polaroid"><div class="frame"><img src="zaluudaa.jpg" alt="us together"></div><div class="cap">young and in love</div></div>
+      <div class="polaroid"><div class="frame"><img src="uul.jpg" alt="us together"></div><div class="cap">that day in the mountains</div></div>
     </div>
   </div>
 </section>
@@ -473,8 +487,7 @@
     <h2>A Letter for You 💌</h2>
     <div class="letter-layout">
       <div class="side-pic">
-        <!-- EDIT: replace with <img src="images/photo5.jpg" ...> -->
-        <div class="frame">📷</div>
+        <div class="frame"><img src="2026_06_10.jpg" alt="us together"></div>
       </div>
       <div class="center">
         <!-- EDIT THIS LETTER TEXT -->
@@ -486,8 +499,7 @@
         <div class="signature">I love you.</div>
       </div>
       <div class="side-pic">
-        <!-- EDIT: replace with <img src="images/photo6.jpg" ...> -->
-        <div class="frame">📷</div>
+        <div class="frame"><img src="visca_barca.jpg" alt="us together"></div>
       </div>
     </div>
   </div>
