@@ -296,7 +296,7 @@
   .polaroid:nth-child(2){ --r: 2deg; }
   .polaroid:nth-child(3){ --r: 1.5deg; }
   .polaroid:nth-child(4){ --r: -1.5deg; }
-  .polaroid:nth-child(5){ --r: 2.2deg; }
+  .polaroid:nth-child(5){ --r: 1deg; }
   .polaroid:nth-child(6){ --r: -1deg; }
   .polaroid .frame{
     aspect-ratio: 1/1; border-radius:6px;
@@ -307,6 +307,14 @@
   }
   .polaroid .frame img{ width:100%; height:100%; object-fit:cover; display:block; }
   .polaroid .cap{ text-align:center; font-size:.8rem; margin-top:8px; color:var(--mauve-soft); }
+
+  /* Landscape polaroids layout */
+  .polaroid.landscape{
+    grid-column: 1 / -1;
+  }
+  .polaroid.landscape .frame{
+    aspect-ratio: 16/9;
+  }
 
   /* big letter */
   .letter-layout{
@@ -474,8 +482,8 @@
       <div class="polaroid"><div class="frame"><img src="hair.JPG" alt="us together"></div><div class="cap">Миний мундаг хайр</div></div>
       <div class="polaroid"><div class="frame"><img src="zaluudaa.JPG" alt="us together"></div><div class="cap">Аав ээж нь залуудаа</div></div>
       <div class="polaroid"><div class="frame"><img src="Уул.JPG" alt="us together"></div><div class="cap">Уул ба гоо үзэсгэлэн</div></div>
-      <div class="polaroid"><div class="frame"><img src="VISCA_BARCA.JPG" alt="us together"></div><div class="cap">VISCA BARCA</div></div>
-      <div class="polaroid"><div class="frame"><img src="goo.JPG" alt="us together"></div><div class="cap">Beauty and the beast</div></div>
+      <div class="polaroid landscape"><div class="frame"><img src="VISCA_BARCA.JPG" alt="us together"></div><div class="cap">VISCA BARCA</div></div>
+      <div class="polaroid landscape"><div class="frame"><img src="goo.JPG" alt="us together"></div><div class="cap">Beauty and the beast</div></div>
     </div>
   </div>
 </section>
