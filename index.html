@@ -643,7 +643,7 @@
         <div class="signature">Баярын мэнд хүргье, ХАЙРТ МИНЬ!</div>
       </div>
       <div class="side-pic">
-        <div class="frame"><img src="bayr.JPG" alt="us together"></div><div class="cap">Хохны баяр</div></div>
+        <div class="frame"><img src="bayr.JPG" alt="us together"></div><div class="cap">Хонхны баяр</div></div>
     </div>
   </div>
 </section>
@@ -653,13 +653,12 @@
   <div class="flower-anim-layer" id="flowerLayer"></div>
   <div class="ending-card" id="endingCard">
     <div class="ending-photo-frame">
-      <!-- EDIT: swap in your favorite ending photo -->
       <img src="ending.jpg" alt="us" onerror="this.parentElement.classList.add('img-missing')">
-      <div class="img-missing-note">💜<br>save your ending photo as<br><code>ending.jpg</code></div>
+      <div class="img-missing-note">💜<br><br><code>ending.jpg</code></div>
     </div>
     <h2>Баярын мэнд хүргье, ХАЙРТ МИНЬ 💜</h2>
     <p class="ending-msg">Энд байгаа бэлэг бүхэн миний хувьд чи ямар их үнэ цэнэтэй вэ гэдгийг харуулах өчүүхэн нэг хэсэг нь юм шүү. Минийх байгаад баярлалаа.</p>
-    <button class="back-btn" data-back="gifts" style="margin:0;">← back to gifts</button>
+    <button class="back-btn" data-back="gifts" style="margin:0;">← Буцах</button>
   </div>
   <button class="replay-fab" id="replayBtn" title="Дахин үзэх" aria-label="Дахин үзэх">↻</button>
 </section>
@@ -668,8 +667,8 @@
 <div class="modal-backdrop" id="modalBackdrop">
   <div class="modal">
     <div style="font-size:2rem;">🥺</div>
-    <p>Aw, come on... try again?</p>
-    <button class="btn btn-yes" id="tryAgainBtn">Try Again</button>
+    <p>ӨӨӨӨ..... нээрээ юм уу?</p>
+    <button class="btn btn-yes" id="tryAgainBtn">За Дахиад</button>
   </div>
 </div>
 
@@ -758,8 +757,6 @@
   window.addEventListener('resize', ()=>{
     noBtn.style.transform = 'translate(0,0)';
   });
-
-  // ---------- ending: lots of flowers filling the left & right edges ----------
   const FLOWER_IMAGES = ['medq.png', 'lily.png', 'orchid.png'];
 
   function launchFlowers(){
@@ -777,9 +774,6 @@
       for(let i=0; i<perSide; i++){
         const el = document.createElement('div');
         el.className = 'flower-burst-piece';
-
-        // spread top-to-bottom (slight overflow past the edges for a fuller look),
-        // with a zig-zag x-jitter within the side's band so it isn't a flat line
         const yPercent = -8 + (i/(perSide-1)) * 116;
         const bandJitter = (i % 2 === 0) ? 0 : 10;
         const xPercent = side === 'left'
